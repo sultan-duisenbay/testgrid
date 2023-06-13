@@ -1,22 +1,22 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, PropertyValues } from 'lit';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { customElement, property, state } from 'lit/decorators.js';
 import { map } from 'lit/directives/map.js';
 import { when } from 'lit/directives/when.js';
-import { navigateTab } from './utils/navigation.js';
+import { navigateTabWithoutReload } from './utils/navigation.js';
 import { ListDashboardTabsResponse } from './gen/pb/api/v1/data.js';
 import '@material/mwc-tab';
 import '@material/mwc-tab-bar';
-import './testgrid-dashboard-summary';
-import './testgrid-grid';
+import './testgrid-dashboard-summary.js';
+import './testgrid-grid.js';
 
 /**
- * Class definition for the `testgrid-data-content` element.
+ * Class definition for the `testgrid-dashboard-grid` element.
  * Acts as a container for dashboard summary or grid data.
  */
-@customElement('testgrid-data-content')
+@customElement('testgrid-dashboard-grid')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export class TestgridDataContent extends LitElement {
+export class TestgridDashboardGrid extends LitElement {
 
   @state()
   tabNames: string[] = [];
@@ -47,7 +47,7 @@ export class TestgridDataContent extends LitElement {
       this.showTab = !this.showTab;
     }
     this.activeIndex = tabIndex;
-    navigateTab(this.dashboardName, this.tabName)
+    navigateTabWithoutReload(this.dashboardName, this.tabName)
   }
 
   /**
@@ -61,7 +61,7 @@ export class TestgridDataContent extends LitElement {
       this.tabName = (<CustomEvent>evt).detail.tabName;
       this.showTab = !this.showTab;
       this.highlightIndex(this.tabName);
-      navigateTab(this.dashboardName, this.tabName!);
+      navigateTabWithoutReload(this.dashboardName, this.tabName!);
     });
     window.addEventListener('popstate', () => {
       console.log(location.pathname);
@@ -70,7 +70,7 @@ export class TestgridDataContent extends LitElement {
         this.showTab = false;
         this.tabName = undefined;
         this.highlightIndex(this.tabName);
-        navigateTab(this.dashboardName, this.tabName!);
+        navigateTabWithoutReload(this.dashboardName, this.tabName!);
       }
     })
   }
@@ -80,6 +80,7 @@ export class TestgridDataContent extends LitElement {
    * Invoked on each update to perform rendering tasks.
    */
   render() {
+    console.log(`rendering dashboard with name: ${this.dashboardName}}`);
     var tabBar = html`${
       // make sure we only render the tabs when there are tabs
       when(this.tabNames.length > 0, () => html`

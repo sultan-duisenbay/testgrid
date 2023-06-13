@@ -30,6 +30,7 @@ export class TestgridGroupSummary extends LitElement {
         rel="stylesheet"
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
+      <h1>Summary for dashboard group: ${this.groupName}</h1>
       <table>
         <thead>
           <tr>
@@ -138,6 +139,11 @@ export class TestgridGroupSummary extends LitElement {
       border-radius: 6px;
       border: 1px solid #cbcbcb;
       border-spacing: 0;
+      margin: 12px;
+    }
+
+    h1{
+      margin: 36px 12px;
     }
 
     .PENDING {

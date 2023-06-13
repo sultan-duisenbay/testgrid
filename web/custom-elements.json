@@ -69,6 +69,18 @@
                 "text": "TabSummaryInfo | undefined"
               },
               "attribute": "info"
+            },
+            {
+              "kind": "method",
+              "name": "changeTab",
+              "privacy": "private",
+              "description": "Lets the data content element know that the tab changed",
+              "parameters": [
+                {
+                  "description": "string",
+                  "name": "tabName"
+                }
+              ]
             }
           ],
           "attributes": [
@@ -145,94 +157,12 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/testgrid-dashboard-summary.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "TabStatusIcon",
-          "default": "new Map<string, string>([\n  ['PASSING', 'done'],\n  ['FAILING', 'warning'],\n  ['FLAKY', 'remove_circle_outline'],\n  ['STALE', 'error_outline'],\n  ['BROKEN', 'broken_image'],\n  ['PENDING', 'schedule'],\n  ['ACCEPTABLE', 'add_circle_outline'],\n])"
-        },
-        {
-          "kind": "class",
-          "description": "Class definition for the `testgrid-dashboard-summary` element.\nRenders the dashboard summary (summary of dashboard tabs).",
-          "name": "TestgridDashboardSummary",
-          "members": [
-            {
-              "kind": "field",
-              "name": "dashboardName",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "dashboardName"
-            },
-            {
-              "kind": "field",
-              "name": "tabSummariesInfo",
-              "type": {
-                "text": "Array<TabSummaryInfo>"
-              },
-              "default": "[]"
-            },
-            {
-              "kind": "method",
-              "name": "fetchTabSummaries",
-              "privacy": "private"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "dashboardName",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "dashboardName"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "testgrid-dashboard-summary",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "TabStatusIcon",
-          "declaration": {
-            "name": "TabStatusIcon",
-            "module": "src/testgrid-dashboard-summary.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TestgridDashboardSummary",
-          "declaration": {
-            "name": "TestgridDashboardSummary",
-            "module": "src/testgrid-dashboard-summary.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "testgrid-dashboard-summary",
-          "declaration": {
-            "name": "TestgridDashboardSummary",
-            "module": "src/testgrid-dashboard-summary.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/testgrid-data-content.ts",
+      "path": "src/testgrid-dashboard-grid.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "Class definition for the `testgrid-data-content` element.\nActs as a container for dashboard summary or grid data.",
-          "name": "TestgridDataContent",
+          "description": "Class definition for the `testgrid-dashboard-grid` element.\nActs as a container for dashboard summary or grid data.",
+          "name": "TestgridDashboardGrid",
           "members": [
             {
               "kind": "field",
@@ -337,25 +267,107 @@
             "name": "LitElement",
             "package": "lit"
           },
-          "tagName": "testgrid-data-content",
+          "tagName": "testgrid-dashboard-grid",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "TestgridDataContent",
+          "name": "TestgridDashboardGrid",
           "declaration": {
-            "name": "TestgridDataContent",
-            "module": "src/testgrid-data-content.ts"
+            "name": "TestgridDashboardGrid",
+            "module": "src/testgrid-dashboard-grid.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "testgrid-data-content",
+          "name": "testgrid-dashboard-grid",
           "declaration": {
-            "name": "TestgridDataContent",
-            "module": "src/testgrid-data-content.ts"
+            "name": "TestgridDashboardGrid",
+            "module": "src/testgrid-dashboard-grid.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/testgrid-dashboard-summary.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "TabStatusIcon",
+          "default": "new Map<string, string>([\n  ['PASSING', 'done'],\n  ['FAILING', 'warning'],\n  ['FLAKY', 'remove_circle_outline'],\n  ['STALE', 'error_outline'],\n  ['BROKEN', 'broken_image'],\n  ['PENDING', 'schedule'],\n  ['ACCEPTABLE', 'add_circle_outline'],\n])"
+        },
+        {
+          "kind": "class",
+          "description": "Class definition for the `testgrid-dashboard-summary` element.\nRenders the dashboard summary (summary of dashboard tabs).",
+          "name": "TestgridDashboardSummary",
+          "members": [
+            {
+              "kind": "field",
+              "name": "dashboardName",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "dashboardName"
+            },
+            {
+              "kind": "field",
+              "name": "tabSummariesInfo",
+              "type": {
+                "text": "Array<TabSummaryInfo>"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "method",
+              "name": "fetchTabSummaries",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "dashboardName",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "dashboardName"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "testgrid-dashboard-summary",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TabStatusIcon",
+          "declaration": {
+            "name": "TabStatusIcon",
+            "module": "src/testgrid-dashboard-summary.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TestgridDashboardSummary",
+          "declaration": {
+            "name": "TestgridDashboardSummary",
+            "module": "src/testgrid-dashboard-summary.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "testgrid-dashboard-summary",
+          "declaration": {
+            "name": "TestgridDashboardSummary",
+            "module": "src/testgrid-dashboard-summary.ts"
           }
         }
       ]
@@ -753,6 +765,141 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/testgrid-group-dashboard.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Class definition for the `testgrid-groupd-dashboard` element.\nActs as a container for group summary or dashboard-grid element.",
+          "name": "TestgridGroupDashboard",
+          "members": [
+            {
+              "kind": "field",
+              "name": "dashboardNames",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "activeIndex",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "showDashboard",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "showDashboard"
+            },
+            {
+              "kind": "field",
+              "name": "groupName",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "groupName"
+            },
+            {
+              "kind": "field",
+              "name": "dashboardName",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "dashboardName"
+            },
+            {
+              "kind": "method",
+              "name": "onDashboardActivated",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent<{index: number}>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "fetchDashboardNames",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "highlightIndex",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "dashboardName",
+                  "type": {
+                    "text": "string | undefined"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "showDashboard",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "showDashboard"
+            },
+            {
+              "name": "groupName",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "groupName"
+            },
+            {
+              "name": "dashboardName",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "dashboardName"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "testgrid-group-dashboard",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TestgridGroupDashboard",
+          "declaration": {
+            "name": "TestgridGroupDashboard",
+            "module": "src/testgrid-group-dashboard.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "testgrid-group-dashboard",
+          "declaration": {
+            "name": "TestgridGroupDashboard",
+            "module": "src/testgrid-group-dashboard.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/testgrid-group-summary.ts",
       "declarations": [
         {
@@ -973,7 +1120,7 @@
               "kind": "field",
               "name": "router",
               "privacy": "private",
-              "default": "new Router(this, [\n    {\n      path: '/:dashboard/*', \n      render: (params: RouteParameter) => html`<testgrid-data-content .dashboardName=${params.dashboard} .tabName=${params[0]} showTab></testgrid-data-content>`,\n    },\n    {\n      path: '/:dashboard', \n      render: (params: RouteParameter) => html`<testgrid-data-content .dashboardName=${params.dashboard}></testgrid-data-content>`,\n    },\n    {\n      path: '/',\n      render: () => html`<testgrid-index></testgrid-index>`,\n    },\n  ])"
+              "default": "new Router(this, [\n    {\n      path: '/groups/:group', \n      render: (params: RouteParameter) => html`<testgrid-group-dashboard .groupName=${params.group}></testgrid-group-dashboard>`,\n    },\n    {\n      path: '/dashboards/:dashboard/*', \n      render: (params: RouteParameter) => html`<testgrid-dashboard-grid .dashboardName=${params.dashboard} .tabName=${params[0]} showTab></testgrid-dashboard-grid>`,\n    },\n    {\n      path: '/dashboards/:dashboard', \n      render: (params: RouteParameter) => html`<testgrid-dashboard-grid .dashboardName=${params.dashboard}></testgrid-dashboard-grid>`,\n    },\n    {\n      path: '/',\n      render: () => html`<testgrid-index></testgrid-index>`,\n    },\n  ])"
             }
           ],
           "superclass": {
@@ -1616,7 +1763,7 @@
         {
           "kind": "variable",
           "name": "TabSummary",
-          "default": "class TabSummary extends LitElement {\n    render() {\n        var _a, _b, _c, _d, _e, _f, _g, _h;\n        return html `\n      <link\n        rel=\"stylesheet\"\n        href=\"https://fonts.googleapis.com/icon?family=Material+Icons\"\n      />\n      <div class=\"tab\">\n        <div class=\"left\">\n          <div class=\"icon-wrapper\">\n            <i class=\"material-icons ${(_a = this.info) === null || _a === void 0 ? void 0 : _a.overallStatus}\"\n              >${(_b = this.info) === null || _b === void 0 ? void 0 : _b.icon}</i\n            >\n          </div>\n        </div>\n        <div class=\"mid\">\n          <div class=\"name\">\n            ${(_c = this.info) === null || _c === void 0 ? void 0 : _c.name}: ${(_d = this.info) === null || _d === void 0 ? void 0 : _d.overallStatus}\n          </div>\n          <div class=\"detailed-status\">${(_e = this.info) === null || _e === void 0 ? void 0 : _e.detailedStatusMsg}</div>\n        </div>\n        <div class=\"right\">\n          <div class=\"stats\">\n            Last update: ${(_f = this.info) === null || _f === void 0 ? void 0 : _f.lastUpdateTimestamp}\n          </div>\n          <div class=\"stats\">\n            Tests last ran: ${(_g = this.info) === null || _g === void 0 ? void 0 : _g.lastRunTimestamp}\n          </div>\n          <div class=\"stats\">\n            Last green run: ${(_h = this.info) === null || _h === void 0 ? void 0 : _h.latestGreenBuild}\n          </div>\n        </div>\n      </div>\n    `;\n    }\n}"
+          "default": "class TabSummary extends LitElement {\n    render() {\n        var _a, _b, _c, _d, _e, _f, _g, _h;\n        return html `\n      <link\n        rel=\"stylesheet\"\n        href=\"https://fonts.googleapis.com/icon?family=Material+Icons\"\n      />\n      <div class=\"tab\">\n        <div class=\"left\">\n          <div class=\"icon-wrapper\">\n            <i class=\"material-icons ${(_a = this.info) === null || _a === void 0 ? void 0 : _a.overallStatus}\"\n              >${(_b = this.info) === null || _b === void 0 ? void 0 : _b.icon}</i\n            >\n          </div>\n        </div>\n        <div class=\"mid\">\n          <div @click=${() => this.changeTab()} class=\"tab-name\">\n            ${(_c = this.info) === null || _c === void 0 ? void 0 : _c.name}: ${(_d = this.info) === null || _d === void 0 ? void 0 : _d.overallStatus}\n          </div>\n          <div class=\"detailed-status\">${(_e = this.info) === null || _e === void 0 ? void 0 : _e.detailedStatusMsg}</div>\n        </div>\n        <div class=\"right\">\n          <div class=\"stats\">\n            Last update: ${(_f = this.info) === null || _f === void 0 ? void 0 : _f.lastUpdateTimestamp}\n          </div>\n          <div class=\"stats\">\n            Tests last ran: ${(_g = this.info) === null || _g === void 0 ? void 0 : _g.lastRunTimestamp}\n          </div>\n          <div class=\"stats\">\n            Last green run: ${(_h = this.info) === null || _h === void 0 ? void 0 : _h.latestGreenBuild}\n          </div>\n        </div>\n      </div>\n    `;\n    }\n    /**\n     * Lets the data content element know that the tab changed\n     *\n     * @fires tab-changed\n     * @param tabName string\n     */\n    changeTab() {\n        var _a;\n        window.dispatchEvent(new CustomEvent('tab-changed', {\n            detail: {\n                tabName: (_a = this.info) === null || _a === void 0 ? void 0 : _a.name\n            },\n        }));\n    }\n}"
         }
       ],
       "exports": [
@@ -1654,6 +1801,28 @@
     },
     {
       "kind": "javascript-module",
+      "path": "out-tsc/src/testgrid-dashboard-grid.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "TestgridDashboardGrid",
+          "default": "class TestgridDashboardGrid extends LitElement {\n    constructor() {\n        super(...arguments);\n        this.tabNames = [];\n        this.activeIndex = 0;\n        this.showTab = false;\n        this.dashboardName = '';\n    }\n    // set the functionality when any tab is clicked on\n    onTabActivated(event) {\n        const tabIndex = event.detail.index;\n        if (tabIndex === this.activeIndex) {\n            return;\n        }\n        this.tabName = this.tabNames[tabIndex];\n        if (this.activeIndex === 0 || tabIndex === 0) {\n            this.showTab = !this.showTab;\n        }\n        this.activeIndex = tabIndex;\n        navigateTabWithoutReload(this.dashboardName, this.tabName);\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked when a component is added to the document's DOM.\n     */\n    connectedCallback() {\n        super.connectedCallback();\n        this.fetchTabNames();\n        window.addEventListener('tab-changed', (evt) => {\n            this.tabName = evt.detail.tabName;\n            this.showTab = !this.showTab;\n            this.highlightIndex(this.tabName);\n            navigateTabWithoutReload(this.dashboardName, this.tabName);\n        });\n        window.addEventListener('popstate', () => {\n            console.log(location.pathname);\n            console.log(location.pathname.split('/'));\n            if (location.pathname.split('/').length === 2) {\n                this.showTab = false;\n                this.tabName = undefined;\n                this.highlightIndex(this.tabName);\n                navigateTabWithoutReload(this.dashboardName, this.tabName);\n            }\n        });\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked on each update to perform rendering tasks.\n     */\n    render() {\n        console.log(`rendering dashboard with name: ${this.dashboardName}}`);\n        var tabBar = html `${\n        // make sure we only render the tabs when there are tabs\n        when(this.tabNames.length > 0, () => html `\n        <mwc-tab-bar .activeIndex=${this.activeIndex} @MDCTabBar:activated=\"${this.onTabActivated}\">\n          ${map(this.tabNames, (name) => html `<mwc-tab label=${name}></mwc-tab>`)}\n        </mwc-tab-bar>`)}`;\n        return html `\n      ${tabBar}\n      ${!this.showTab ?\n            html `<testgrid-dashboard-summary .dashboardName=${this.dashboardName}></testgrid-dashboard-summary>` :\n            html `<testgrid-grid .dashboardName=${this.dashboardName} .tabName=${this.tabName}></testgrid-grid>`}\n    `;\n    }\n    // fetch the tab names to populate the tab bar\n    async fetchTabNames() {\n        try {\n            const response = await fetch(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/dashboards/${this.dashboardName}/tabs`);\n            if (!response.ok) {\n                throw new Error(`HTTP error: ${response.status}`);\n            }\n            const data = ListDashboardTabsResponse.fromJson(await response.json());\n            var tabNames = ['Summary'];\n            data.dashboardTabs.forEach(tab => {\n                tabNames.push(tab.name);\n            });\n            this.tabNames = tabNames;\n            this.highlightIndex(this.tabName);\n        }\n        catch (error) {\n            console.error(`Could not get dashboard summaries: ${error}`);\n        }\n    }\n    // identify which tab to highlight on the tab bar\n    highlightIndex(tabName) {\n        if (tabName === undefined) {\n            this.activeIndex = 0;\n            return;\n        }\n        var index = this.tabNames.indexOf(tabName);\n        if (index > -1) {\n            this.activeIndex = index;\n        }\n    }\n}",
+          "description": "Class definition for the `testgrid-dashboard-grid` element.\nActs as a container for dashboard summary or grid data."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TestgridDashboardGrid",
+          "declaration": {
+            "name": "TestgridDashboardGrid",
+            "module": "out-tsc/src/testgrid-dashboard-grid.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "out-tsc/src/testgrid-dashboard-summary.js",
       "declarations": [
         {
@@ -1664,7 +1833,7 @@
         {
           "kind": "variable",
           "name": "TestgridDashboardSummary",
-          "default": "class TestgridDashboardSummary extends LitElement {\n    constructor() {\n        super(...arguments);\n        this.dashboardName = '';\n        this.tabSummariesInfo = [];\n    }\n    connectedCallback() {\n        super.connectedCallback();\n        this.fetchTabSummaries();\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked on each update to perform rendering tasks.\n     */\n    render() {\n        return html `\n      ${map(this.tabSummariesInfo, (ts) => html `<tab-summary .info=${ts}></tab-summary>`)}\n  `;\n    }\n    // fetch the tab summaries and tab names to populate the tab bar\n    async fetchTabSummaries() {\n        try {\n            const response = await fetch(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/dashboards/${this.dashboardName}/tab-summaries`);\n            if (!response.ok) {\n                throw new Error(`HTTP error: ${response.status}`);\n            }\n            const data = ListTabSummariesResponse.fromJson(await response.json());\n            var tabSummaries = [];\n            data.tabSummaries.forEach(ts => {\n                const si = convertResponse(ts);\n                tabSummaries.push(si);\n            });\n            this.tabSummariesInfo = tabSummaries;\n        }\n        catch (error) {\n            console.error(`Could not get dashboard summaries: ${error}`);\n        }\n    }\n}",
+          "default": "class TestgridDashboardSummary extends LitElement {\n    constructor() {\n        super(...arguments);\n        this.dashboardName = '';\n        this.tabSummariesInfo = [];\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked when element properties are changed.\n     */\n    willUpdate(changedProperties) {\n        if (changedProperties.has('dashboardName')) {\n            this.fetchTabSummaries();\n        }\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked on each update to perform rendering tasks.\n     */\n    render() {\n        return html `\n      ${map(this.tabSummariesInfo, (ts) => html `<tab-summary .info=${ts}></tab-summary>`)}\n  `;\n    }\n    // fetch the tab summaries and tab names to populate the tab bar\n    async fetchTabSummaries() {\n        try {\n            const response = await fetch(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/dashboards/${this.dashboardName}/tab-summaries`);\n            if (!response.ok) {\n                throw new Error(`HTTP error: ${response.status}`);\n            }\n            const data = ListTabSummariesResponse.fromJson(await response.json());\n            var tabSummaries = [];\n            data.tabSummaries.forEach(ts => {\n                const si = convertResponse(ts);\n                tabSummaries.push(si);\n            });\n            this.tabSummariesInfo = tabSummaries;\n        }\n        catch (error) {\n            console.error(`Could not get dashboard summaries: ${error}`);\n        }\n    }\n}",
           "description": "Class definition for the `testgrid-dashboard-summary` element.\nRenders the dashboard summary (summary of dashboard tabs)."
         }
       ],
@@ -1694,7 +1863,7 @@
         {
           "kind": "variable",
           "name": "TestgridDataContent",
-          "default": "class TestgridDataContent extends LitElement {\n    constructor() {\n        super(...arguments);\n        this.tabNames = [];\n        this.activeIndex = 0;\n        this.showTab = false;\n        this.dashboardName = '';\n    }\n    // set the functionality when any tab is clicked on\n    onTabActivated(event) {\n        const tabIndex = event.detail.index;\n        if (tabIndex === this.activeIndex) {\n            return;\n        }\n        this.tabName = this.tabNames[tabIndex];\n        if (this.activeIndex === 0 || tabIndex === 0) {\n            this.showTab = !this.showTab;\n        }\n        this.activeIndex = tabIndex;\n        navigateTab(this.dashboardName, this.tabName);\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked when a component is added to the document's DOM.\n     */\n    connectedCallback() {\n        super.connectedCallback();\n        this.fetchTabNames();\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked on each update to perform rendering tasks.\n     */\n    render() {\n        var tabBar = html `${\n        // make sure we only render the tabs when there are tabs\n        when(this.tabNames.length > 0, () => html `\n        <mwc-tab-bar .activeIndex=${this.activeIndex} @MDCTabBar:activated=\"${this.onTabActivated}\">\n          ${map(this.tabNames, (name) => html `<mwc-tab label=${name}></mwc-tab>`)}\n        </mwc-tab-bar>`)}`;\n        return html `\n      ${tabBar}\n      ${!this.showTab ?\n            html `<testgrid-dashboard-summary .dashboardName=${this.dashboardName}></testgrid-dashboard-summary>` :\n            html `<testgrid-grid .dashboardName=${this.dashboardName} .tabName=${this.tabName}></testgrid-grid>`}\n    `;\n    }\n    // fetch the tab names to populate the tab bar\n    async fetchTabNames() {\n        try {\n            const response = await fetch(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/dashboards/${this.dashboardName}/tabs`);\n            if (!response.ok) {\n                throw new Error(`HTTP error: ${response.status}`);\n            }\n            const data = ListDashboardTabsResponse.fromJson(await response.json());\n            var tabNames = ['Summary'];\n            data.dashboardTabs.forEach(tab => {\n                tabNames.push(tab.name);\n            });\n            this.tabNames = tabNames;\n            this.highlightIndex(this.tabName);\n        }\n        catch (error) {\n            console.error(`Could not get dashboard summaries: ${error}`);\n        }\n    }\n    // identify which tab to highlight on the tab bar\n    highlightIndex(tabName) {\n        if (tabName === undefined) {\n            return;\n        }\n        var index = this.tabNames.indexOf(tabName);\n        if (index > -1) {\n            this.activeIndex = index;\n        }\n    }\n}",
+          "default": "class TestgridDataContent extends LitElement {\n    constructor() {\n        super(...arguments);\n        this.tabNames = [];\n        this.activeIndex = 0;\n        this.showTab = false;\n        this.dashboardName = '';\n    }\n    // set the functionality when any tab is clicked on\n    onTabActivated(event) {\n        const tabIndex = event.detail.index;\n        if (tabIndex === this.activeIndex) {\n            return;\n        }\n        this.tabName = this.tabNames[tabIndex];\n        if (this.activeIndex === 0 || tabIndex === 0) {\n            this.showTab = !this.showTab;\n        }\n        this.activeIndex = tabIndex;\n        navigateTab(this.dashboardName, this.tabName);\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked when a component is added to the document's DOM.\n     */\n    connectedCallback() {\n        super.connectedCallback();\n        this.fetchTabNames();\n        window.addEventListener('tab-changed', (evt) => {\n            this.tabName = evt.detail.tabName;\n            this.showTab = !this.showTab;\n            this.highlightIndex(this.tabName);\n            navigateTab(this.dashboardName, this.tabName);\n        });\n        window.addEventListener('popstate', () => {\n            console.log(location.pathname);\n            console.log(location.pathname.split('/'));\n            if (location.pathname.split('/').length === 2) {\n                this.showTab = false;\n                this.tabName = undefined;\n                this.highlightIndex(this.tabName);\n                navigateTab(this.dashboardName, this.tabName);\n            }\n        });\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked on each update to perform rendering tasks.\n     */\n    render() {\n        var tabBar = html `${\n        // make sure we only render the tabs when there are tabs\n        when(this.tabNames.length > 0, () => html `\n        <mwc-tab-bar .activeIndex=${this.activeIndex} @MDCTabBar:activated=\"${this.onTabActivated}\">\n          ${map(this.tabNames, (name) => html `<mwc-tab label=${name}></mwc-tab>`)}\n        </mwc-tab-bar>`)}`;\n        return html `\n      ${tabBar}\n      ${!this.showTab ?\n            html `<testgrid-dashboard-summary .dashboardName=${this.dashboardName}></testgrid-dashboard-summary>` :\n            html `<testgrid-grid .dashboardName=${this.dashboardName} .tabName=${this.tabName}></testgrid-grid>`}\n    `;\n    }\n    // fetch the tab names to populate the tab bar\n    async fetchTabNames() {\n        try {\n            const response = await fetch(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/dashboards/${this.dashboardName}/tabs`);\n            if (!response.ok) {\n                throw new Error(`HTTP error: ${response.status}`);\n            }\n            const data = ListDashboardTabsResponse.fromJson(await response.json());\n            var tabNames = ['Summary'];\n            data.dashboardTabs.forEach(tab => {\n                tabNames.push(tab.name);\n            });\n            this.tabNames = tabNames;\n            this.highlightIndex(this.tabName);\n        }\n        catch (error) {\n            console.error(`Could not get dashboard summaries: ${error}`);\n        }\n    }\n    // identify which tab to highlight on the tab bar\n    highlightIndex(tabName) {\n        if (tabName === undefined) {\n            this.activeIndex = 0;\n            return;\n        }\n        var index = this.tabNames.indexOf(tabName);\n        if (index > -1) {\n            this.activeIndex = index;\n        }\n    }\n}",
           "description": "Class definition for the `testgrid-data-content` element.\nActs as a container for dashboard summary or grid data."
         }
       ],
@@ -1859,6 +2028,28 @@
     },
     {
       "kind": "javascript-module",
+      "path": "out-tsc/src/testgrid-group-dashboard.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "TestgridGroupDashboard",
+          "default": "class TestgridGroupDashboard extends LitElement {\n    constructor() {\n        super(...arguments);\n        this.dashboardNames = [];\n        this.activeIndex = 0;\n        this.showDashboard = false;\n        this.groupName = '';\n    }\n    // set the functionality when any tab is clicked on\n    onDashboardActivated(event) {\n        const dashboardIndex = event.detail.index;\n        if (dashboardIndex === this.activeIndex) {\n            return;\n        }\n        this.dashboardName = this.dashboardNames[dashboardIndex];\n        console.log(`${this.dashboardName}`);\n        if (this.activeIndex === 0 || dashboardIndex === 0) {\n            this.showDashboard = !this.showDashboard;\n        }\n        this.activeIndex = dashboardIndex;\n        this.requestUpdate();\n        navigateDashboardWithoutReload(this.groupName, this.dashboardName);\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked when a component is added to the document's DOM.\n     */\n    connectedCallback() {\n        super.connectedCallback();\n        this.fetchDashboardNames();\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked on each update to perform rendering tasks.\n     */\n    render() {\n        var tabBar = html `${\n        // make sure we only render the tabs when there are tabs\n        when(this.dashboardNames.length > 0, () => html `\n        <mwc-tab-bar .activeIndex=${this.activeIndex} @MDCTabBar:activated=\"${this.onDashboardActivated}\">\n          ${map(this.dashboardNames, (name) => html `<mwc-tab label=${name}></mwc-tab>`)}\n        </mwc-tab-bar>`)}`;\n        return html `\n      ${tabBar}\n      ${!this.showDashboard ?\n            html `<testgrid-group-summary .groupName=${this.groupName}></testgrid-group-summary>` :\n            html `<testgrid-dashboard-grid .dashboardName=${this.dashboardName}></testgrid-dashboard-grid>`}\n    `;\n    }\n    // fetch the tab names to populate the tab bar\n    async fetchDashboardNames() {\n        try {\n            const response = await fetch(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/dashboard-groups/${this.groupName}`);\n            if (!response.ok) {\n                throw new Error(`HTTP error: ${response.status}`);\n            }\n            const data = GetDashboardGroupResponse.fromJson(await response.json());\n            var dashboardNames = [`${this.groupName}`];\n            data.dashboards.forEach(dashboard => {\n                dashboardNames.push(dashboard.name);\n            });\n            this.dashboardNames = dashboardNames;\n            this.highlightIndex(this.dashboardName);\n        }\n        catch (error) {\n            console.error(`Could not get dashboards for the group: ${error}`);\n        }\n    }\n    // identify which tab to highlight on the tab bar\n    highlightIndex(dashboardName) {\n        if (dashboardName === undefined) {\n            this.activeIndex = 0;\n            return;\n        }\n        var index = this.dashboardNames.indexOf(dashboardName);\n        if (index > -1) {\n            this.activeIndex = index;\n        }\n    }\n}",
+          "description": "Class definition for the `testgrid-groupd-dashboard` element.\nActs as a container for group summary or dashboard-grid element."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TestgridGroupDashboard",
+          "declaration": {
+            "name": "TestgridGroupDashboard",
+            "module": "out-tsc/src/testgrid-group-dashboard.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "out-tsc/src/testgrid-group-summary.js",
       "declarations": [
         {
@@ -1885,7 +2076,7 @@
         {
           "kind": "variable",
           "name": "TestgridIndex",
-          "default": "class TestgridIndex extends LitElement {\n    constructor() {\n        super(...arguments);\n        this.dashboards = [];\n        this.dashboardGroups = [];\n        this.respectiveDashboards = [];\n        // toggles between the dashboards of a particular group or a dashboard without a group\n        this.show = true;\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked when a component is added to the document's DOM.\n     */\n    connectedCallback() {\n        super.connectedCallback();\n        this.fetchDashboardGroups();\n        this.fetchDashboards();\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked on each update to perform rendering tasks.\n     */\n    render() {\n        return html `\n      <div class=\"flex-container\">\n        <!-- loading dashboard groups -->\n        <mwc-list style=\"min-width: 760px\">\n          ${map(this.dashboardGroups, (dash, index) => html `\n              <mwc-list-item\n                id=${index}\n                class=\"column card dashboard-group\"\n                raised\n                @click=\"${() => this.fetchRespectiveDashboards(dash)}\"\n              >\n                <div class=\"container\">\n                  <p>${dash}</p>\n                </div>\n              </mwc-list-item>\n            `)}\n        </mwc-list>\n\n        <!-- loading dashboards -->\n        ${this.show ? dashboardTemplate(this.dashboards) : ''}\n\n        <!-- loading respective dashboards -->\n        ${!this.show ? dashboardTemplate(this.respectiveDashboards) : ''}\n        ${!this.show ? html `\n              <mwc-button class=\"column\" raised @click=\"${() => this.show = !this.show}\">X</mwc-button>\n            `\n            : ''}\n      </div>\n    `;\n    }\n    // fetch the the list of dashboards from the API\n    async fetchDashboards() {\n        try {\n            fetch(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/dashboards`).then(async (response) => {\n                const resp = ListDashboardsResponse.fromJson(await response.json());\n                const dashboards = [];\n                resp.dashboards.forEach(db => {\n                    console.log(db.dashboardGroupName);\n                    dashboards.push(db.name);\n                });\n                this.dashboards = dashboards;\n            });\n        }\n        catch (error) {\n            console.log(`failed to fetch: ${error}`);\n        }\n    }\n    // fetch the list of dashboard groups from API\n    async fetchDashboardGroups() {\n        try {\n            fetch(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/dashboard-groups`).then(async (response) => {\n                const resp = ListDashboardGroupsResponse.fromJson(await response.json());\n                const dashboardGroups = [];\n                resp.dashboardGroups.forEach(db => {\n                    dashboardGroups.push(db.name);\n                });\n                this.dashboardGroups = dashboardGroups;\n            });\n        }\n        catch (error) {\n            console.log(`failed to fetch: ${error}`);\n        }\n    }\n    // fetch the list of respective dashboards for a group from API\n    async fetchRespectiveDashboards(name) {\n        this.show = false;\n        try {\n            fetch(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/dashboard-groups/${name}`).then(async (response) => {\n                const resp = ListDashboardsResponse.fromJson(await response.json());\n                const respectiveDashboards = [];\n                resp.dashboards.forEach(ts => {\n                    respectiveDashboards.push(ts.name);\n                });\n                this.respectiveDashboards = respectiveDashboards;\n            });\n        }\n        catch (error) {\n            console.error(`Could not get dashboard summaries: ${error}`);\n        }\n    }\n}",
+          "default": "class TestgridIndex extends LitElement {\n    constructor() {\n        super(...arguments);\n        this.dashboards = [];\n        this.dashboardGroups = [];\n        this.respectiveDashboards = [];\n        // toggles between the dashboards of a particular group or a dashboard without a group\n        this.show = true;\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked when a component is added to the document's DOM.\n     */\n    connectedCallback() {\n        super.connectedCallback();\n        this.fetchDashboardGroups();\n        this.fetchDashboards();\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked on each update to perform rendering tasks.\n     */\n    render() {\n        return html `\n      <div class=\"flex-container\">\n        <!-- loading dashboard groups -->\n        <mwc-list style=\"min-width: 760px\">\n          ${map(this.dashboardGroups, (group, index) => html `\n              <mwc-list-item\n                id=${index}\n                class=\"column card dashboard-group\"\n                raised\n                @click=\"${() => navigateGroup(group)}\"\n              >\n                <div class=\"container\">\n                  <p>${group}</p>\n                </div>\n              </mwc-list-item>\n            `)}\n        </mwc-list>\n\n        <!-- loading dashboards -->\n        ${this.show ? dashboardTemplate(this.dashboards) : ''}\n\n        <!-- loading respective dashboards -->\n        ${!this.show ? dashboardTemplate(this.respectiveDashboards) : ''}\n        ${!this.show ? html `\n              <mwc-button class=\"column\" raised @click=\"${() => this.show = !this.show}\">X</mwc-button>\n            `\n            : ''}\n      </div>\n    `;\n    }\n    // fetch the the list of dashboards from the API\n    async fetchDashboards() {\n        try {\n            fetch(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/dashboards`).then(async (response) => {\n                const resp = ListDashboardsResponse.fromJson(await response.json());\n                const dashboards = [];\n                resp.dashboards.forEach(db => {\n                    if (db.dashboardGroupName === \"\") {\n                        dashboards.push(db.name);\n                    }\n                });\n                this.dashboards = dashboards;\n            });\n        }\n        catch (error) {\n            console.log(`failed to fetch: ${error}`);\n        }\n    }\n    // fetch the list of dashboard groups from API\n    async fetchDashboardGroups() {\n        try {\n            fetch(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/dashboard-groups`).then(async (response) => {\n                const resp = ListDashboardGroupsResponse.fromJson(await response.json());\n                const dashboardGroups = [];\n                resp.dashboardGroups.forEach(db => {\n                    dashboardGroups.push(db.name);\n                });\n                this.dashboardGroups = dashboardGroups;\n            });\n        }\n        catch (error) {\n            console.log(`failed to fetch: ${error}`);\n        }\n    }\n    // fetch the list of respective dashboards for a group from API\n    async fetchRespectiveDashboards(name) {\n        this.show = false;\n        try {\n            fetch(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/dashboard-groups/${name}`).then(async (response) => {\n                const resp = ListDashboardsResponse.fromJson(await response.json());\n                const respectiveDashboards = [];\n                resp.dashboards.forEach(ts => {\n                    respectiveDashboards.push(ts.name);\n                });\n                this.respectiveDashboards = respectiveDashboards;\n            });\n        }\n        catch (error) {\n            console.error(`Could not get dashboard summaries: ${error}`);\n        }\n    }\n}",
           "description": "Class definition for the `testgrid-index` element.\nRenders the list of dashboards and dashboard groups available."
         }
       ],
@@ -1907,7 +2098,7 @@
         {
           "kind": "variable",
           "name": "TestgridRouter",
-          "default": "class TestgridRouter extends LitElement {\n    constructor() {\n        super(...arguments);\n        this.router = new Router(this, [\n            {\n                path: '/:dashboard/*',\n                render: (params) => html `<testgrid-data-content .dashboardName=${params.dashboard} .tabName=${params[0]} showTab></testgrid-data-content>`,\n            },\n            {\n                path: '/:dashboard',\n                render: (params) => html `<testgrid-data-content .dashboardName=${params.dashboard}></testgrid-data-content>`,\n            },\n            {\n                path: '/',\n                render: () => html `<testgrid-index></testgrid-index>`,\n            },\n        ]);\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked when a component is added to the document's DOM.\n     */\n    connectedCallback() {\n        super.connectedCallback();\n        window.addEventListener('location-changed', () => {\n            this.router.goto(location.pathname);\n        });\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked on each update to perform rendering tasks.\n     */\n    render() {\n        return html `${this.router.outlet()}`;\n    }\n}",
+          "default": "class TestgridRouter extends LitElement {\n    constructor() {\n        super(...arguments);\n        this.router = new Router(this, [\n            {\n                path: '/groups/:group',\n                render: (params) => html `<testgrid-group-dashboard .groupName=${params.group}></testgrid-group-dashboard>`,\n            },\n            {\n                path: '/dashboards/:dashboard/*',\n                render: (params) => html `<testgrid-dashboard-grid .dashboardName=${params.dashboard} .tabName=${params[0]} showTab></testgrid-dashboard-grid>`,\n            },\n            {\n                path: '/dashboards/:dashboard',\n                render: (params) => html `<testgrid-dashboard-grid .dashboardName=${params.dashboard}></testgrid-dashboard-grid>`,\n            },\n            {\n                path: '/',\n                render: () => html `<testgrid-index></testgrid-index>`,\n            },\n        ]);\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked when a component is added to the document's DOM.\n     */\n    connectedCallback() {\n        super.connectedCallback();\n        window.addEventListener('location-changed', () => {\n            this.router.goto(location.pathname);\n        });\n    }\n    /**\n     * Lit-element lifecycle method.\n     * Invoked on each update to perform rendering tasks.\n     */\n    render() {\n        return html `${this.router.outlet()}`;\n    }\n}",
           "description": "Class definition for the `testgrid-router` element.\nHandles the routing logic."
         }
       ],
@@ -2519,7 +2710,7 @@
       "declarations": [
         {
           "kind": "function",
-          "name": "navigate",
+          "name": "navigateDashboard",
           "parameters": [
             {
               "name": "name",
@@ -2534,11 +2725,30 @@
               }
             }
           ],
-          "description": "Navigates application to a specified page."
+          "description": "Navigates application to a specified dashboard."
         },
         {
           "kind": "function",
-          "name": "navigateTab",
+          "name": "navigateGroup",
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "path",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Navigates application to a specified group."
+        },
+        {
+          "kind": "function",
+          "name": "navigateTabWithoutReload",
           "parameters": [
             {
               "name": "dashboard",
@@ -2553,23 +2763,58 @@
               }
             }
           ],
-          "description": "Changes the URL without reloading"
+          "description": "Changes the pathname (for tab) without reloading"
+        },
+        {
+          "kind": "function",
+          "name": "navigateDashboardWithoutReload",
+          "parameters": [
+            {
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "dashboard",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Changes the pathname (for tab) without reloading"
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "navigate",
+          "name": "navigateDashboard",
           "declaration": {
-            "name": "navigate",
+            "name": "navigateDashboard",
             "module": "src/utils/navigation.ts"
           }
         },
         {
           "kind": "js",
-          "name": "navigateTab",
+          "name": "navigateGroup",
           "declaration": {
-            "name": "navigateTab",
+            "name": "navigateGroup",
+            "module": "src/utils/navigation.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "navigateTabWithoutReload",
+          "declaration": {
+            "name": "navigateTabWithoutReload",
+            "module": "src/utils/navigation.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "navigateDashboardWithoutReload",
+          "declaration": {
+            "name": "navigateDashboardWithoutReload",
             "module": "src/utils/navigation.ts"
           }
         }
@@ -2581,7 +2826,7 @@
       "declarations": [
         {
           "kind": "function",
-          "name": "navigate",
+          "name": "navigateDashboard",
           "parameters": [
             {
               "name": "name"
@@ -2593,11 +2838,27 @@
               }
             }
           ],
-          "description": "Navigates application to a specified page."
+          "description": "Navigates application to a specified dashboard."
         },
         {
           "kind": "function",
-          "name": "navigateTab",
+          "name": "navigateGroup",
+          "parameters": [
+            {
+              "name": "name"
+            },
+            {
+              "name": "path",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Navigates application to a specified group."
+        },
+        {
+          "kind": "function",
+          "name": "navigateTabWithoutReload",
           "parameters": [
             {
               "name": "dashboard",
@@ -2612,23 +2873,58 @@
               }
             }
           ],
-          "description": "Changes the URL without reloading"
+          "description": "Changes the pathname (for tab) without reloading"
+        },
+        {
+          "kind": "function",
+          "name": "navigateDashboardWithoutReload",
+          "parameters": [
+            {
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "dashboard",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Changes the pathname (for tab) without reloading"
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "navigate",
+          "name": "navigateDashboard",
           "declaration": {
-            "name": "navigate",
+            "name": "navigateDashboard",
             "module": "out-tsc/src/utils/navigation.js"
           }
         },
         {
           "kind": "js",
-          "name": "navigateTab",
+          "name": "navigateGroup",
           "declaration": {
-            "name": "navigateTab",
+            "name": "navigateGroup",
+            "module": "out-tsc/src/utils/navigation.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "navigateTabWithoutReload",
+          "declaration": {
+            "name": "navigateTabWithoutReload",
+            "module": "out-tsc/src/utils/navigation.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "navigateDashboardWithoutReload",
+          "declaration": {
+            "name": "navigateDashboardWithoutReload",
             "module": "out-tsc/src/utils/navigation.js"
           }
         }

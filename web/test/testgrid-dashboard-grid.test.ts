@@ -7,15 +7,15 @@ import {
   waitUntil,
 } from '@open-wc/testing';
 
-import { TestgridDataContent} from '../src/testgrid-data-content';
+import { TestgridDashboardGrid} from '../src/testgrid-dashboard-grid';
 import { Tab } from '@material/mwc-tab';
 
 describe('Testgrid Data Content page', () => {
-  let element: TestgridDataContent;
+  let element: TestgridDashboardGrid;
   beforeEach(async () => {
     // Need to wrap an element to apply its properties (ex. @customElement)
     // See https://open-wc.org/docs/testing/helpers/#test-a-custom-class-with-properties
-    const tagName = defineCE(class extends TestgridDataContent {});
+    const tagName = defineCE(class extends TestgridDashboardGrid {});
     const tag = unsafeStatic(tagName);
     element = await fixture(html`<${tag} .dashboardName=${'fake-dashboard-1'}></${tag}>`);
   });

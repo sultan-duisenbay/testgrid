@@ -1,7 +1,8 @@
 import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
 import { Router } from "@lit-labs/router";
-import './testgrid-data-content';
+import './testgrid-group-dashboard';
+import './testgrid-dashboard-grid';
 import './testgrid-index';
 
 // Defines the type of params used for rendering components under different paths
@@ -17,12 +18,20 @@ interface RouteParameter {
 export class TestgridRouter extends LitElement{
   private router = new Router(this, [
     {
-      path: '/:dashboard/*', 
-      render: (params: RouteParameter) => html`<testgrid-data-content .dashboardName=${params.dashboard} .tabName=${params[0]} showTab></testgrid-data-content>`,
+      path: '/groups/:group/*', 
+      render: (params: RouteParameter) => html`<testgrid-group-dashboard .groupName=${params.group} .dashboardName=${params[0]} showDashboard></testgrid-group-dashboard>`,
     },
     {
-      path: '/:dashboard', 
-      render: (params: RouteParameter) => html`<testgrid-data-content .dashboardName=${params.dashboard}></testgrid-data-content>`,
+      path: '/groups/:group', 
+      render: (params: RouteParameter) => html`<testgrid-group-dashboard .groupName=${params.group}></testgrid-group-dashboard>`,
+    },
+    {
+      path: '/dashboards/:dashboard/*', 
+      render: (params: RouteParameter) => html`<testgrid-dashboard-grid .dashboardName=${params.dashboard} .tabName=${params[0]} showTab></testgrid-dashboard-grid>`,
+    },
+    {
+      path: '/dashboards/:dashboard', 
+      render: (params: RouteParameter) => html`<testgrid-dashboard-grid .dashboardName=${params.dashboard}></testgrid-dashboard-grid>`,
     },
     {
       path: '/',

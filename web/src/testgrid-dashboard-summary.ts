@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, PropertyValues } from 'lit';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { customElement, property, state } from 'lit/decorators.js';
 import { map } from 'lit/directives/map.js';
@@ -59,9 +59,14 @@ export class TestgridDashboardSummary extends LitElement {
   @state()
   tabSummariesInfo: Array<TabSummaryInfo> = [];
 
-  connectedCallback(){
-    super.connectedCallback();
-    this.fetchTabSummaries();
+  /**
+   * Lit-element lifecycle method.
+   * Invoked when element properties are changed.
+   */
+  willUpdate(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('dashboardName')) {
+      this.fetchTabSummaries();
+    }
   }
 
   /**
